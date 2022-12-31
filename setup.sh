@@ -61,7 +61,7 @@ EOF
 
 gen_data() {
     seq $FIRST_PORT $LAST_PORT | while read port; do
-        echo "muaclone$port/pass$(random)/$IP4/$port/$(gen64 $IP6)"
+        echo "user$port/pass$(random)/$IP4/$port/$(gen64 $IP6)"
     done
 }
 
@@ -81,8 +81,8 @@ yum -y install gcc net-tools bsdtar zip >/dev/null
 
 install_3proxy
 
-echo "working folder = /home/bkns"
-WORKDIR="/home/bkns"
+echo "working folder = /home/bkns1"
+WORKDIR="/home/bkns1"
 WORKDATA="${WORKDIR}/data.txt"
 mkdir $WORKDIR && cd $_
 
@@ -91,8 +91,8 @@ IP6=$(curl -6 -s icanhazip.com | cut -f1-4 -d':')
 
 echo "Internal ip = ${IP4}. Exteranl sub for ip6 = ${IP6}"
 
-FIRST_PORT=22000
-LAST_PORT=22001
+FIRST_PORT=24000
+LAST_PORT=24199
 
 gen_data >$WORKDIR/data.txt
 gen_iptables >$WORKDIR/boot_iptables.sh
